@@ -40,25 +40,47 @@ Page({
           prevVideo:e.data.stdout,
           downloadUrl:e.data.fileName
         })
-        const downloadTask =  wx.downloadFile({
-          url: e.data.fileName,
-          success: res =>{
-            this.setData({
-              filePath:res.tempFilePath
-            })
+        wx.request({
+          url: 'https://www.guofudiyiqianduan.com/clearTheWater/getTKUrl/downLoadTK',
+          method:'POST',
+          header:{
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          data:{
+            downLoadUrl:e.data.stdout,
+            fileName:e.data.fileName
+          },
+          success:r => {
+            console.log(r.data.success,e.data.fileName,)
+            if(r.data.success){
+              const downloadTask =  wx.downloadFile({
+                url: "https://www.guofudiyiqianduan.com/videos/"+ e.data.fileName+ ".mp4",
+                success: res =>{
+                  this.setData({
+                    filePath:res.tempFilePath
+                  })
+                }
+              })
+              downloadTask.onProgressUpdate((res) => {
+                if (res.progress === 100) {
+                  this.setData({
+                    progress: res.progress
+                  })
+                } else {
+                  this.setData({
+                    progress: res.progress
+                  })
+                }
+              })
+            }
+          },
+          fail:res => {
+
           }
+
         })
-        downloadTask.onProgressUpdate((res) => {
-          if (res.progress === 100) {
-            this.setData({
-              progress: res.progress
-            })
-          } else {
-            this.setData({
-              progress: res.progress
-            })
-          }
-        })
+
+
       }
     })
   },
@@ -66,6 +88,11 @@ Page({
     wx.saveVideoToPhotosAlbum({
       filePath: this.data.filePath,
       success: res => {
+        wx.showToast({
+          title: '已保存到相册啦',
+          icon: 'success',
+          duration: 2000
+        })
         console.log('保存到相册成功',res)
       },
       fail: res => {

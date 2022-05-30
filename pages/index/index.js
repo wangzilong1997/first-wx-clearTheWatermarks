@@ -1,4 +1,10 @@
 // pages/clear/index.js
+
+let app = getApp()
+let { globalData: {
+  _targetUrl
+}} = app
+
 Page({
 
   /**
@@ -13,10 +19,15 @@ Page({
     downloadUrl:null,
     // 临时保存的视频路径
     filePath:null,
+    // 进度条
     progress:0,
+    // 下载按钮
+    isCanDownLoad:true
   },
   onLoad(){
     console.log('onload',this)
+    console.log('#url',app,app.globalData,_targetUrl)
+    
   },
   inputChange(e){
     console.log(e)
@@ -25,8 +36,12 @@ Page({
   tapSure(e){
     console.log(this)
     console.log('tapSure确定按钮执行',this.data.inputVal)
+    this.setData({
+      isCanDownLoad:true,
+      progress:0
+    })
     wx.request({
-      url: 'https://www.guofudiyiqianduan.com/clearTheWater/getTKUrl/realUrl',
+      url: `${_targetUrl}/clearTheWater/getTKUrl/realUrl`,
       method:'POST',
       header:{
         "Content-Type": "application/x-www-form-urlencoded"
@@ -41,20 +56,22 @@ Page({
           downloadUrl:e.data.fileName
         })
         wx.request({
-          url: 'https://www.guofudiyiqianduan.com/clearTheWater/getTKUrl/downLoadTK',
+          url: `${_targetUrl}/clearTheWater/getTKUrl/downLoadTK`,
           method:'POST',
           header:{
             "Content-Type": "application/x-www-form-urlencoded"
           },
           data:{
             downLoadUrl:e.data.stdout,
-            fileName:e.data.fileName
+            fileName:e.data.fileName,
+            info:this.data.inputVal
           },
           success:r => {
             console.log(r.data.success,e.data.fileName,)
             if(r.data.success){
               const downloadTask =  wx.downloadFile({
-                url: "https://www.guofudiyiqianduan.com/videos/"+ e.data.fileName+ ".mp4",
+                url: `${_targetUrl}/videos/${e.data.fileName}.mp4`,
+                // url:r.data.downLoadUrl,
                 success: res =>{
                   this.setData({
                     filePath:res.tempFilePath
@@ -64,6 +81,7 @@ Page({
               downloadTask.onProgressUpdate((res) => {
                 if (res.progress === 100) {
                   this.setData({
+                    isCanDownLoad:false,
                     progress: res.progress
                   })
                 } else {

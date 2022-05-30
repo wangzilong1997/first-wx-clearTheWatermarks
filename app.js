@@ -14,6 +14,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    _targetUrl:'https://www.guofudiyiqianduan.com',
+    // _targetUrl:'https://localhost'
   }
 })

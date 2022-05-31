@@ -1,35 +1,35 @@
 <!--pages/clear/index.wxml-->
 <view>
   <!-- banner -->
-  <!-- <view>
+  <view>
     <swiper
-    autoplay="{{false}}"
+    autoplay="{{true}}"
     indicator-dots="true"
     interval="5000" 
     easing-function="easeInOutCubic"
     >
-          <swiper-item>
+          <!-- <swiper-item>
             <view class="smoky-text">
                 <span>去</span>
                 <span>水</span>
                 <span>印</span>
             </view>
-          </swiper-item>
+          </swiper-item> -->
           <swiper-item>
             <view class="swiper-slogn">使用教程</view>
           </swiper-item>
-          <swiper-item>
+          <!-- <swiper-item>
             <view class="smoky-text">
                 <span>去</span>
                 <span>水</span>
                 <span>印</span>
             </view>
-          </swiper-item>
+          </swiper-item> -->
           <swiper-item>
             <view class="swiper-slogn">第一好用的去水印工具</view>
           </swiper-item>
     </swiper>
-  </view> -->
+  </view>
   <view class="main">
     <view class="input-text-area">
       <textarea class="input-text-area-text" placeholder="请输入完整的地址链接" bindinput="inputChange"/>

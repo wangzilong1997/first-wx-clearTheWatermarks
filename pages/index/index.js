@@ -114,6 +114,11 @@ Page({
         console.log('保存到相册成功',res)
       },
       fail: res => {
+        wx.showToast({
+          title: '保存失败',
+          icon: 'error',
+          duration: 2000
+        })
         console.log('保存到相册失败',res);
       }
     })  

@@ -1,6 +1,10 @@
-<view>
+<view class="components">
   <view capture-bind:tap="goWaterMark" class="pic-content">
     <image src="../../public/image/tiktok.png" class="pic-pic"></image>
     抖音去水印
+  </view>
+  <view capture-bind:tap="goMyCamera" class="pic-content">
+    <image src="../../public/image/mycamera.png" class="pic-pic mycamera-pic"></image>
+    水印相机
   </view>
 </view>

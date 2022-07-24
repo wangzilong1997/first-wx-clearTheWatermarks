@@ -1,0 +1,16 @@
+<!-- 自定义相机 -->
+<my-camera id="myCamera"></my-camera> 
+
+<view class="btns">
+  <view capture-bind:tap="takePhoto" class="btn">
+    点击拍照
+  </view>
+  <view capture-bind:tap="savePhoto" class="btn" wx:if="{{pic}}">
+    保存照片
+  </view>
+</view>
+
+
+<view>
+  <image src="{{pic}}" class="pic"></image>
+</view>

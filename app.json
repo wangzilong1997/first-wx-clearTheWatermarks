@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/user/user",
-    "pages/watermark/watermark"
+    "pages/watermark/watermark",
+    "pages/mycamera/mycamera"
   ],
   "window": {
     "backgroundTextStyle": "light",

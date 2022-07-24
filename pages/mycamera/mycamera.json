@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "my-camera":"../components/myCamera/myCamera"
+  }
+}

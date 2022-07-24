@@ -1,4 +1,7 @@
 /* pages/index/index.wxss */
+.components{
+  display: flex;
+}
 
 .pic-content {
     width: 200rpx;
@@ -12,4 +15,8 @@
 .pic-pic {
   width: 100rpx;
   height: 100rpx;
+}
+
+.mycamera-pic {
+  width: 115rpx;
 }

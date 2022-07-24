@@ -67,5 +67,10 @@ Page({
     wx.navigateTo({
       url: '../watermark/watermark',
     })
+  },
+  goMyCamera:()=> {
+    wx.navigateTo({
+      url: '../mycamera/mycamera',
+    })
   }
 })

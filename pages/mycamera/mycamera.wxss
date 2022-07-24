@@ -1,0 +1,19 @@
+/* pages/mycamera/mycamera.wxss */
+.pic{
+  width: 100vw;
+  height: 80vh;
+  margin-top: 5vh;
+}
+.btns {
+  display: flex;
+  justify-content: space-around;
+}
+.btn {
+    background: #4faa35;
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 10rpx;
+    color: #fff;
+}

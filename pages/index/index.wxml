@@ -1,50 +1,6 @@
-<!--pages/clear/index.wxml-->
 <view>
-  <!-- banner -->
-  <view>
-    <swiper
-    autoplay="{{true}}"
-    indicator-dots="true"
-    interval="5000" 
-    easing-function="easeInOutCubic"
-    >
-          <!-- <swiper-item>
-            <view class="smoky-text">
-                <span>去</span>
-                <span>水</span>
-                <span>印</span>
-            </view>
-          </swiper-item> -->
-          <swiper-item>
-            <view class="swiper-slogn">使用教程</view>
-          </swiper-item>
-          <!-- <swiper-item>
-            <view class="smoky-text">
-                <span>去</span>
-                <span>水</span>
-                <span>印</span>
-            </view>
-          </swiper-item> -->
-          <swiper-item>
-            <view class="swiper-slogn">第一好用的去水印工具</view>
-          </swiper-item>
-    </swiper>
+  <view capture-bind:tap="goWaterMark" class="pic-content">
+    <image src="../../public/image/tiktok.png" class="pic-pic"></image>
+    抖音去水印
   </view>
-  <view class="main">
-    <view class="input-text-area">
-      <textarea class="input-text-area-text" placeholder="请输入完整的地址链接" bindinput="inputChange"/>
-    </view>
-    <view class="btns">
-      <button class="btns-btn" bindtap="tapSure">解析</button>
-      <button wx-if="{{prevVideo}}" class="btns-btn" bindtap="download" disabled="{{isCanDownLoad}}">下载</button>
-    </view>
-  </view>
-  <view class="finish">
-    <view wx-if="{{prevVideo}}">
-      <progress percent="{{progress}}" stroke-width="8" color="green"/>
-      <video class="video-show" src="{{prevVideo}}"></video>
-    </view>
-  </view>
-  
 </view>
-

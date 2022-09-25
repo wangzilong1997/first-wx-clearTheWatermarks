@@ -72,5 +72,10 @@ Page({
     wx.navigateTo({
       url: '../mycamera/mycamera',
     })
+  },
+  goSelect:() => {
+    wx.navigateTo({
+      url: '../select/select',
+    })
   }
 })

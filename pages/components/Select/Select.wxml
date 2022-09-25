@@ -1,0 +1,28 @@
+<view class="cell" >
+  <!-- 抄的台座列表 -->
+  <block
+    wx:if="{{true}}">
+    <scroll-view scroll-y="true" 
+      class="select-list {{selectList.length>0?'show':''}}"
+      >
+      <view class="pedestalItem" wx:for="{{selectList}}"
+        wx:key="index"
+        data-id="{{item.ID}}"
+        data-name="{{item.Name}}"
+        capture-bind:tap="selectListTap"
+        >
+        {{item.Name}}
+      </view>
+    </scroll-view>
+  </block>
+  <view class="cell-bd cell-primary input-wrap w_view2">
+    <input 
+      id="inputPedestal"
+      bindinput="inputFunc" 
+      bindfocus="focusFunc" 
+      bindblur="blurFunc"
+      value="{{inputValue}}"
+      placeholder="{{true?'请扫码/选择焊机':'无焊机'}}" 
+    />
+  </view>
+</view>

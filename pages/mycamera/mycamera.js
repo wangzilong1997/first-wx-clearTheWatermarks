@@ -56,7 +56,9 @@ Page({
     var that = this
     vm.myCamera = vm.selectComponent("#myCamera")
     vm.myCamera.takePhoto({
+      canLocation:true,
       canTime:true,
+
       // 开始之前的函数
       brforeCreate:() => {
         console.log(`%chello brforeCreate`,'color: red')

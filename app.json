@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/user/user",
     "pages/watermark/watermark",
-    "pages/mycamera/mycamera"
+    "pages/mycamera/mycamera",
+    "pages/select/select"
   ],
   "window": {
     "backgroundTextStyle": "light",

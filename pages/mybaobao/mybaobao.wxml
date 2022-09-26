@@ -1,7 +1,11 @@
 
-<view wx:if="{{timerShow}}">
-  <view>{{beginTime}}</view>
-  <view>{{intertval}}</view>
+<view wx:if="{{timerShow}}" class="bbcontainer">
+  <!-- <view>{{beginTime}}</view>
+  <view>{{intertval}}</view> -->
+  <view class="calendar-box">
+    <calendar id="calendar"/>
+  </view>
+
 </view>
 <view wx:else="{{timerShow}}">
   <view>
@@ -14,3 +18,5 @@
   </view>
   <button type="primary" bindtap="submit">提交</button>
 </view>
+
+<!-- <calendar id="calendar" /> -->

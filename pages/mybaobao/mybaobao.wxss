@@ -1,1 +1,8 @@
 /* pages/mybaobao/mybaobao.wxss */
+.calendar-box{
+  width: 90vw;
+}
+.bbcontainer{
+  display: flex;
+  justify-content: center;
+}

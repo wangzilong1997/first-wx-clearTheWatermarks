@@ -5,6 +5,10 @@ let { globalData: {
   _targetUrl
 }} = app
 
+    
+
+
+
 Page({
 
   /**
@@ -14,12 +18,14 @@ Page({
     beginTime:'-1',
     intertval:'-1',
     timerShow:false,
+    calendar:null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    let that = this
     wx.showLoading({
       title: '请求数据中',
     })
@@ -28,11 +34,13 @@ Page({
       success:(res) => {
         console.log('请求个人数据',res)
         if(res.data.success){
-          this.setData({
+          that.setData({
             beginTime:res.data.data.time,
             intertval:res.data.data.timeInterval,
             timerShow:true,
           })
+
+
         }else{
           
         }
@@ -43,56 +51,28 @@ Page({
         })
       },
     })
+
     
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
+  onShow(){
+    setTimeout(() => {
+      this.calendarFunc(this)
+    },1000)
 
   },
+  calendarFunc(that){
+    // 获取日历组件上的 calendar 对象
+    // 调用 calendar 对象上的方法
+    console.log(that.calendar)
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
+    const toSet = that.dealDateFunc(that.data.beginTime,that.data.intertval)
 
-  },
+    that.calendar.setCalendarConfig({
+      multi: 'multi',
+    });
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+    // that.calendar.jump()
+    that.calendar.setSelectedDays(toSet);
   },
   beginTimerChange(e){
     console.log(e)
@@ -123,5 +103,27 @@ Page({
     wx.request({
       url: url,
     })
+  },
+  dealDateFunc(date,interval,during = 5){
+    let res = []
+    let dateTimes = new Date(date)
+    let intervalTimes = interval * 1000 * 60 * 60 * 24
+    let year = dateTimes.getFullYear()
+    console.log('+dateTimes < (new Date(date) + 365 * 1000 * 60 * 60 * 24',+dateTimes < (+new Date(date) + 365 * 1000 * 60 * 60 * 24))
+    while(+dateTimes < (+new Date(date) + 365 * 1000 * 60 * 60 * 24 * 10) ){
+      for(let i=0;i<during;i++){
+        let year = dateTimes.getFullYear()
+        let month = dateTimes.getMonth()+1
+        let day = dateTimes.getDate()
+        res.push({
+          year: year,
+          month: month,
+          date: day
+        })
+        dateTimes = new Date(+dateTimes + 1000 * 60 * 60 * 24)
+      }
+      dateTimes = new Date(+dateTimes + (interval - during > 0 ?interval - during :0 ) * 1000 * 60 * 60 * 24)
+    }
+    return res 
   }
 })

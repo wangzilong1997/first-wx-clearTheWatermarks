@@ -1,4 +1,9 @@
 // pages/index/index.js
+let app = getApp()
+let { globalData: {
+  _targetUrl
+}} = app
+
 Page({
 
   /**
@@ -12,7 +17,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 登录
+    wx.login({
+      success (res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: `${_targetUrl}/wx/login`,
+            data: {
+              code: res.code
+            },
+            success:(res) => {
+              console.log(res)
+              if(res.data.success){
+                wx.setStorageSync('openid', res.data.data.openid)
+                wx.setStorageSync('session_key', res.data.data.session_key)
+              }
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+          wx.showToast({
+            title:`登陆失败！${res.errMsg}`
+          })
+        }
+      }
+    })
   },
 
   /**
@@ -76,6 +106,11 @@ Page({
   goSelect:() => {
     wx.navigateTo({
       url: '../select/select',
+    })
+  },
+  goMybaobao:() =>{
+    wx.navigateTo({
+      url: '../mybaobao/mybaobao',
     })
   }
 })

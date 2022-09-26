@@ -7,8 +7,12 @@
     <image src="../../public/image/mycamera.png" class="pic-pic mycamera-pic"></image>
     水印相机
   </view>
-  <view capture-bind:tap="goSelect" class="pic-content">
+  <!-- <view capture-bind:tap="goSelect" class="pic-content">
     <image src="../../public/image/select.png" class="pic-pic mycamera-pic"></image>
     选择器
+  </view> -->
+  <view capture-bind:tap="goMybaobao" class="pic-content">
+    <image src="../../public/image/mybaobao.png" class="pic-pic mycamera-pic"></image>
+    我的宝宝
   </view>
 </view>

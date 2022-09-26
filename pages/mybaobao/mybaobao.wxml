@@ -1,0 +1,16 @@
+
+<view wx:if="{{timerShow}}">
+  <view>{{beginTime}}</view>
+  <view>{{intertval}}</view>
+</view>
+<view wx:else="{{timerShow}}">
+  <view>
+   <picker mode = "date" fields="day" bindchange="beginTimerChange">
+    选择时间{{beginTime == -1 ? '' : beginTime}}
+   </picker>
+  </view>
+  <view>
+  选择预测间隔<input type="number" bindinput="intervalInput"/>
+  </view>
+  <button type="primary" bindtap="submit">提交</button>
+</view>

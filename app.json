@@ -4,7 +4,8 @@
     "pages/user/user",
     "pages/watermark/watermark",
     "pages/mycamera/mycamera",
-    "pages/select/select"
+    "pages/select/select",
+    "pages/mybaobao/mybaobao"
   ],
   "window": {
     "backgroundTextStyle": "light",

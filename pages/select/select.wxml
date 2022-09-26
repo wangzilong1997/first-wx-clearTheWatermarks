@@ -3,7 +3,13 @@
   <view >value：{{inputValue}} </view>
   <view >id：{{inputId}}</view>
 
-  <myselect bind:searchFunc="searchFunc" bind:getSelectDataFunc='getSelectFunc' inputStyle='background:#fff;' selectStyle="background:#fff" placeholder="请扫码输入"></myselect>
+  <myselect 
+  bind:searchFunc="searchFunc" 
+  bind:getSelectDataFunc='getSelectFunc' 
+  inputStyle='background:#fff;' 
+  selectStyle="background:#fff;" 
+  placeholder="请扫码输入"
+  ></myselect>
 
 </view>
 

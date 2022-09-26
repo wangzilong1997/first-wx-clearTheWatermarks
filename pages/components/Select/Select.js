@@ -133,7 +133,7 @@ Component({
     },
     blurFunc(){
       this.setData({
-        // selectShow:false
+        selectShow:false
       })
     },
   }

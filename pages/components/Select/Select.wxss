@@ -1,1 +1,19 @@
 /* pages/components/Select/Select.wxss */
+.select {
+  position: relative;
+}
+.select-list{
+  max-height: 200rpx;
+  position: absolute;
+  top: 50rpx;
+  border: 1rpx solid #eee;
+  border-radius: 0 0 2rpx 2rpx;
+}
+.select_input_box{
+  border: 1rpx solid #eee;
+  min-height: 50rpx;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 2rpx 2rpx 0 0;
+}

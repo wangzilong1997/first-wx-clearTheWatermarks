@@ -1,4 +1,4 @@
-<view class="cell" >
+<view class="select" >
   <!-- 抄的台座列表 -->
   <block
     wx:if="{{true}}">
@@ -15,14 +15,14 @@
       </view>
     </scroll-view>
   </block>
-  <view class="cell-bd cell-primary input-wrap w_view2">
+  <view class="select_input_box">
     <input 
       id="inputPedestal"
       bindinput="inputFunc" 
       bindfocus="focusFunc" 
       bindblur="blurFunc"
       value="{{inputValue}}"
-      placeholder="{{true?'请扫码/选择焊机':'无焊机'}}" 
+      placeholder="{{'请扫码/输入焊机'}}" 
     />
   </view>
 </view>

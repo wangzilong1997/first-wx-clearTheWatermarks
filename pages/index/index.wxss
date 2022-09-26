@@ -1,14 +1,18 @@
 /* pages/index/index.wxss */
 .components{
   display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
 }
 
 .pic-content {
     width: 200rpx;
+    height: 200rpx;
     font-size: 30rpx;
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: center;
 }
 
 

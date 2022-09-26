@@ -1,1 +1,11 @@
 /* pages/select/select.wxss */
+
+Page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200rpx;
+}
+.select-box{
+  width: 300rpx;
+}

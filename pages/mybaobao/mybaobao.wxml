@@ -1,5 +1,5 @@
 
-<view wx:if="{{timerShow}}" class="bbcontainer">
+<view class="bbcontainer">
   <!-- <view>{{beginTime}}</view>
   <view>{{intertval}}</view> -->
   <view class="calendar-box">
@@ -7,14 +7,14 @@
   </view>
 
 </view>
-<view wx:else="{{timerShow}}">
-  <view>
+<view class="s-con">
+  <view class="s-item">
    <picker mode = "date" fields="day" bindchange="beginTimerChange">
     选择时间{{beginTime == -1 ? '' : beginTime}}
    </picker>
   </view>
-  <view>
-  选择预测间隔<input type="number" bindinput="intervalInput"/>
+  <view class="s-item">
+  输入间隔<input type="number" bindinput="intervalInput" value="{{intertval == -1 ? '' : intertval}}" class="s-item-input"/>
   </view>
   <button type="primary" bindtap="submit">提交</button>
 </view>

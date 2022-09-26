@@ -19,6 +19,8 @@ Page({
     intertval:'-1',
     timerShow:false,
     calendar:null,
+
+    showTimer:''
   },
 
   /**
@@ -34,8 +36,9 @@ Page({
       success:(res) => {
         console.log('请求个人数据',res)
         if(res.data.success){
+          let d = new Date(res.data.data.time)
           that.setData({
-            beginTime:res.data.data.time,
+            beginTime:d.getFullYear() + "-"+ (d.getMonth() + 1) +"-"+ d.getDate(),
             intertval:res.data.data.timeInterval,
             timerShow:true,
           })
@@ -64,12 +67,12 @@ Page({
     // 获取日历组件上的 calendar 对象
     // 调用 calendar 对象上的方法
     console.log(that.calendar)
-
-    const toSet = that.dealDateFunc(that.data.beginTime,that.data.intertval)
-
     that.calendar.setCalendarConfig({
       multi: 'multi',
     });
+
+    let toSet = that.dealDateFunc(that.data.beginTime,that.data.intertval)
+
 
     // that.calendar.jump()
     that.calendar.setSelectedDays(toSet);
@@ -77,7 +80,7 @@ Page({
   beginTimerChange(e){
     console.log(e)
     this.setData({
-      beginTime:e.detail.value
+      beginTime:e.detail.value,
     })
   },
   intervalInput(e){
@@ -87,6 +90,10 @@ Page({
     })
   },
   submit(){
+    let that = this
+    wx.showLoading({
+      title: '请求数据中',
+    })
     if(this.data.beginTime == -1){
       wx.showToast({
         title: '输入开始时间',
@@ -99,9 +106,53 @@ Page({
       })
       return 
     }
+    that.calendar.cancelSelectedDates()
     let url = `${_targetUrl}/wx/bb/setData?openid=${wx.getStorageSync('openid')}&time=${this.data.beginTime}&timeInterval=${this.data.intertval}`
     wx.request({
       url: url,
+      success:() =>{
+        wx.request({
+          url: `${_targetUrl}/wx/bb/getData?openid=${wx.getStorageSync('openid')}`,
+          success:(res) => {
+            console.log('请求个人数据',res)
+            if(res.data.success){
+              let d = new Date(res.data.data.time)
+              that.setData({
+                beginTime:d.getFullYear() + "-"+ (d.getMonth() + 1) +"-"+ d.getDate(),
+                intertval:res.data.data.timeInterval,
+                timerShow:true,
+              })
+    
+              that.calendar.setCalendarConfig({
+                multi: 'multi',
+              });
+              let toSet = that.dealDateFunc(res.data.data.time,res.data.data.timeInterval)
+          
+          
+              // that.calendar.jump()
+  
+              setTimeout(()=>{
+                that.calendar.setSelectedDays(toSet)
+              },500)
+
+            }else{
+              let toSet = that.dealDateFunc(that.data.beginTime,that.data.intertval)
+          
+          
+              // that.calendar.jump()
+  
+              that.calendar.setSelectedDays(toSet)
+            }
+
+
+            wx.hideLoading({
+              success: (res) => {
+    
+              },
+            })
+          },
+        })
+      }
     })
   },
   dealDateFunc(date,interval,during = 5){

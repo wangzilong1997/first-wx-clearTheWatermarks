@@ -9,3 +9,11 @@ Page{
 .select-box{
   width: 300rpx;
 }
+
+.hello{
+  background: red;
+}
+
+.world{
+  background: green;
+}

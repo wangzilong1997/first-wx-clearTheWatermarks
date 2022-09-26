@@ -1,11 +1,12 @@
-<view class="select" >
+<view class="select">
   <!-- 抄的台座列表 -->
   <block
     wx:if="{{selectShow}}">
     <scroll-view scroll-y="true" 
-      class="select-list {{selectList.length>0?'show':''}}"
+      class="select-list"
+      style="{{selectStyle}}"
       >
-      <view class="pedestalItem" wx:for="{{selectList}}"
+      <view wx:for="{{selectList}}"
         wx:key="index"
         data-id="{{item.ID}}"
         data-name="{{item.Name}}"
@@ -15,14 +16,13 @@
       </view>
     </scroll-view>
   </block>
-  <view class="select_input_box">
+  <view class="select_input_box" style="{{inputStyle}}">
     <input 
-      id="inputPedestal"
       bindinput="inputFunc" 
       bindfocus="focusFunc" 
       bindblur="blurFunc"
       value="{{inputValue}}"
-      placeholder="{{'请扫码/输入焊机'}}" 
+      placeholder="{{placeholder}}" 
     />
   </view>
 </view>

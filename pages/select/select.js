@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    inputValue:'empty',
+    inputId:'empty'
   },
 
   /**
@@ -26,6 +27,13 @@ Page({
           return item
         }))
       }
+    })
+  },
+  getSelectFunc:function(getTarget){
+    let {id,name} = getTarget.detail
+    this.setData({
+      inputId:id,
+      inputValue:name
     })
   }
 })

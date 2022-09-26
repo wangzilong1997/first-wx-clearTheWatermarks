@@ -1,5 +1,9 @@
 
 <view class="select-box">
-  <myselect bind:searchFunc="searchFunc"></myselect>
+  <view>value：{{inputValue}} </view>
+  <view>id：{{inputId}}</view>
+
+  <myselect bind:searchFunc="searchFunc" bind:getSelectFunc='getSelectFunc'></myselect>
+
 </view>
 

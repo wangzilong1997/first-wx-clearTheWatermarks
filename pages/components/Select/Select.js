@@ -13,6 +13,8 @@ Component({
   data: {
     selectList:[],
     inputValue:'',
+    inputId:'-1',
+    selectShow:false,
   },
 
   lifetimes:{
@@ -41,6 +43,27 @@ Component({
             selectList:res
           })}
       )
+    },
+    'selectList':function(selectList){
+      console.log('selectList展示列表',selectList)
+      let target = selectList.filter(item => {
+        return item.Name == this.data.inputValue
+      })
+      if(target.length == 0){
+        this.setData({
+          inputId:-1
+        })
+      }else{
+        this.setData({
+          inputId:target[0].ID
+        })
+      }
+    },
+    'inputValue,inputId':function(inputValue,inputId){
+      this.backData(
+        this.data.inputId,
+        this.data.inputValue
+      )
     }
   },
   /**
@@ -57,5 +80,26 @@ Component({
     getData(like,callback){
       this.triggerEvent('searchFunc', {like:like,callback:callback})
     },
+    backData(id,name){
+      this.triggerEvent('getSelectFunc', {id:id,name:name})
+    },
+    focusFunc(){
+      this.setData({
+        selectShow:true
+      })
+    },
+    blurFunc(){
+      this.setData({
+        selectShow:false
+      })
+    },
+    selectListTap(e){
+      let {id,name} = e.currentTarget.dataset
+      console.log('点击选择项',id,name)
+      this.setData({
+        inputValue:name,
+        inputId:id
+      })
+    }
   }
 })

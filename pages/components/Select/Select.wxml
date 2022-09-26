@@ -1,7 +1,7 @@
 <view class="select" >
   <!-- 抄的台座列表 -->
   <block
-    wx:if="{{true}}">
+    wx:if="{{selectShow}}">
     <scroll-view scroll-y="true" 
       class="select-list {{selectList.length>0?'show':''}}"
       >

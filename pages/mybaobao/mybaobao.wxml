@@ -2,7 +2,7 @@
 <view class="bbcontainer">
   <!-- <view>{{beginTime}}</view>
   <view>{{intertval}}</view> -->
-  <view class="calendar-box">
+  <view class="calendar-box" wx:if="{{timerShow}}">
     <calendar id="calendar"/>
   </view>
 

@@ -20,7 +20,8 @@ Page({
     timerShow:false,
     calendar:null,
 
-    showTimer:''
+    showTimer:'',
+    calenderShow:false
   },
 
   /**
@@ -58,9 +59,36 @@ Page({
     
   },
   onShow(){
+    let that = this
+    wx.showLoading({
+      title: '请求数据中',
+    })
+    wx.request({
+      url: `${_targetUrl}/wx/bb/getData?openid=${wx.getStorageSync('openid')}`,
+      success:(res) => {
+        console.log('请求个人数据',res)
+        if(res.data.success){
+          let d = new Date(res.data.data.time)
+          that.setData({
+            beginTime:d.getFullYear() + "-"+ (d.getMonth() + 1) +"-"+ d.getDate(),
+            intertval:res.data.data.timeInterval,
+            timerShow:true,
+          })
+
+
+        }else{
+          
+        }
+        wx.hideLoading({
+          success: (res) => {
+
+          },
+        })
+      },
+    })
     setTimeout(() => {
       this.calendarFunc(this)
-    },1000)
+    },2000)
 
   },
   calendarFunc(that){
@@ -126,12 +154,13 @@ Page({
               that.calendar.setCalendarConfig({
                 multi: 'multi',
               });
-              let toSet = that.dealDateFunc(res.data.data.time,res.data.data.timeInterval)
+  
           
           
               // that.calendar.jump()
   
               setTimeout(()=>{
+                let toSet = that.dealDateFunc(d.getFullYear() + "-"+ (d.getMonth() + 1) +"-"+ d.getDate(),res.data.data.timeInterval)
                 that.calendar.setSelectedDays(toSet)
               },500)
 
@@ -157,11 +186,11 @@ Page({
   },
   dealDateFunc(date,interval,during = 5){
     let res = []
-    let dateTimes = new Date(date)
+    let dateTimes = new Date(date.replace(/-/g,'/'))
     let intervalTimes = interval * 1000 * 60 * 60 * 24
     let year = dateTimes.getFullYear()
-    console.log('+dateTimes < (new Date(date) + 365 * 1000 * 60 * 60 * 24',+dateTimes < (+new Date(date) + 365 * 1000 * 60 * 60 * 24))
-    while(+dateTimes < (+new Date(date) + 365 * 1000 * 60 * 60 * 24 * 10) ){
+    console.log('+dateTimes < (new Date(date) + 365 * 1000 * 60 * 60 * 24',+dateTimes < (+new Date(date.replace(/-/g,'/')) + 365 * 1000 * 60 * 60 * 24))
+    while(+dateTimes < (+new Date(date.replace(/-/g,'/')) + 365 * 1000 * 60 * 60 * 24 * 10) ){
       for(let i=0;i<during;i++){
         let year = dateTimes.getFullYear()
         let month = dateTimes.getMonth()+1
